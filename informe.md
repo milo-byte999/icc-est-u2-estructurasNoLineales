@@ -50,7 +50,7 @@ printTreeRecursivo(actual.getLeft(), nivel + 1);
 
 ## Resultado del Ejercicio 1
 
-![Ejercicio 1](ruta_de_la_imagen)
+![Ejercicio 1](/src/imagenes/ejercicio1.png)
 ---
 
 # Ejercicio 2: Invertir un Árbol Binario
@@ -82,6 +82,8 @@ Finalmente se imprimió el árbol antes y después de la inversión para poder c
 
 ## Resultado del Ejercicio 2
 
+![Ejercicio 2](/src/imagenes/ejercicio2.png)
+
 ---
 
 # Ejercicio 3: Listar Niveles en Listas Enlazadas
@@ -112,6 +114,8 @@ if(actual.getRight() != null){
 Los nodos encontrados en cada nivel se almacenaron en listas y posteriormente se imprimieron mostrando el número de nivel y los valores correspondientes.
 
 ## Resultado del Ejercicio 3
+
+![Ejercicio 3](/src/imagenes/ejercicio3.png)
 
 ---
 
@@ -146,7 +150,9 @@ El resultado obtenido se mostró mediante el método encargado de imprimir la pr
 printDepth(root);
 ```
 
-## Resultado del Ejercicio
+## Resultado del Ejercicio4
+
+![Ejercicio 4](/src/imagenes/ejercicio4.png)
 
 ---
 
