@@ -5,6 +5,7 @@ import structures.node.Node;
 public class Ejercicio2 {
 
  public void invertTree(Node<Integer> root){
+    System.out.println("----- Ejercicio 2 -----");
     System.out.println("Arbol Original");
     printTree(root);
 
