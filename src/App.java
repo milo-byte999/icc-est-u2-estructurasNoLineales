@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import models.Contacto;
 import models.Persona;
+import structures.grafos.Graph;
 import structures.node.Node;
 import structures.trees.BynariTree;
 import structures.trees.Ejercicio1;
@@ -25,8 +26,41 @@ public class App {
         runSets();
         runMaps();
         runPersonaController();
+        runGraph();
 
     }
+
+private static void runGraph() {
+    Graph<String> graph = new Graph<>();
+
+        graph.addEdge("K", "A");
+        graph.addEdge("E", "K");
+
+        graph.addEdge("A", "B");
+        graph.addEdge("B", "C");
+
+        graph.addEdge("A", "C");
+        graph.addEdge("A", "D");
+
+        graph.addEdge("C", "D");
+        graph.addEdge("C", "E");
+
+        graph.addEdge("E", "J");
+        
+        
+
+        System.out.println("Grafo original:");
+        graph.print();
+
+        System.out.println("\nEliminando K...\n");
+        graph.removeNode("K");
+
+        System.out.println("Grafo actualizado:");
+        graph.print();
+
+        System.out.println("\nCantidad de direcciones: " + graph.totalDirecciones());
+        System.out.println("Cantidad de conexiones: " + graph.totalConexiones());
+}
 
     private static void runPersonaController() {
         PersonaController controller = new PersonaController();

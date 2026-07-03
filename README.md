@@ -422,3 +422,5 @@ Peso del arbol: 3
 # Conclusión
 
 La práctica permitió comprender el funcionamiento interno de los árboles binarios y el uso de recursividad para recorrer e insertar elementos. También se aplicó programación genérica mediante `Comparable`, permitiendo reutilizar la misma estructura para diferentes tipos de objetos y fortaleciendo el manejo de estructuras dinámicas en Java.
+
+![Resultado](/src/imagenes/final.png)
