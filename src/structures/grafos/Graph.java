@@ -6,111 +6,106 @@ import java.util.Map;
 import java.util.Set;
 import structures.node.Node;
 
-public class Graph<T> {
+public class Graph<T>{
 
-    Map<Node<T>, Set<Node<T>>> nodes;
+    private Map<T, Node<T>> nodes;
+    private Map<Node<T>, Set<Node<T>>> graph;
 
-    public Graph() {
-        this.nodes = new HashMap<>();
+    public Graph(){
+        nodes = new HashMap<>();
+        graph = new HashMap<>();
     }
 
-    public void add(Node<T> node) {
-
+    public void add(T data){
+        if(!nodes.containsKey(data)){
+            Node<T> node = new Node<>(data);
+            nodes.put(data, node);
+            graph.put(node, new HashSet<>());
+        }
     }
 
-    public void add(T value) {
-        Node<T> node = new Node<>(value);
-        nodes.putIfAbsent(node, new HashSet<>());
-    }
-
-    public void addEdge(T v1, T v2) {
-        Node<T> nV1 = new Node<>(v1);
-        Node<T> nV2 = new Node<>(v2);
+    public void addEdge(T v1, T v2){
         add(v1);
         add(v2);
-        nodes.get(nV1).add(nV2);
-        nodes.get(nV2).add(nV1);
+
+        Node<T> n1 = nodes.get(v1);
+        Node<T> n2 = nodes.get(v2);
+
+        graph.get(n1).add(n2);
+        graph.get(n2).add(n1);
     }
 
-    public void addEdgeUnit(T v1, T v2) {
-        Node<T> nV1 = new Node<>(v1);
-        Node<T> nV2 = new Node<>(v2);
+    public void addEdgeUni(T v1, T v2){
         add(v1);
         add(v2);
-        nodes.get(nV1).add(nV2);
+
+        Node<T> n1 = nodes.get(v1);
+        Node<T> n2 = nodes.get(v2);
+
+        graph.get(n1).add(n2);
     }
 
-    public void print() {
-        for (Map.Entry<Node<T>, Set<Node<T>>> entry : nodes.entrySet()) {
-            System.out.print(entry.getKey() + "->");
-            for (Node<T> node : entry.getValue()) {
-                System.out.print(node);
+    public void removeEdge(T v1, T v2){
+        Node<T> n1 = nodes.get(v1);
+        Node<T> n2 = nodes.get(v2);
+
+        if(n1 != null && n2 != null){
+            graph.get(n1).remove(n2);
+            graph.get(n2).remove(n1);
+        }
+    }
+
+    public void removeEdgeUni(T v1, T v2){
+        Node<T> n1 = nodes.get(v1);
+        Node<T> n2 = nodes.get(v2);
+
+        if(n1 != null && n2 != null){
+            graph.get(n1).remove(n2);
+        }
+    }
+
+    public void remove(T data){
+        Node<T> node = nodes.get(data);
+        if(node == null) return;
+
+        for(Set<Node<T>> conexiones : graph.values()){
+            conexiones.remove(node);
+        }
+
+        graph.remove(node);
+        nodes.remove(data);
+    }
+
+    public void printGraph(){
+        for(Map.Entry<Node<T>, Set<Node<T>>> entry : graph.entrySet()){
+            System.out.print(entry.getKey() + " -> ");
+            for(Node<T> conexion : entry.getValue()){
+                System.out.print(conexion + " ");
             }
             System.out.println();
         }
-        System.out.println("Total de direcciones: " + totalDirecciones());
-        System.out.println("Total de conexiones: " + totalConexiones());
     }
 
-    public void removeEdge(T v1, T v2) {
-        Node<T> nV1 = new Node<>(v1);
-        Node<T> nV2 = new Node<>(v2);
-        if (nodes.containsKey(nV1) && nodes.containsKey(nV2)) {
-            nodes.get(nV1).remove(nV2);
-            nodes.get(nV2).remove(nV1);
-        }
-    }
-
-    public void removeEdgeUnit(T v1, T v2) {
-        Node<T> nV1 = new Node<>(v1);
-        Node<T> nV2 = new Node<>(v2);
-        if (nodes.containsKey(nV1) && nodes.containsKey(nV2)) {
-            nodes.get(nV1).remove(nV2);
-        }
-    }
-
-    public void removeNode(T value) {
-
-        Node<T> node = new Node<>(value);
-
-        if (!nodes.containsKey(node)) {
-            return;
-        }
-
-        for (Set<Node<T>> vecinos : nodes.values()) {
-            vecinos.remove(node);
-        }
-
-        nodes.remove(node);
-    }
-
-    public int totalDirecciones() {
-
+    public int totalDirecciones(){
         int total = 0;
-
-        for (Set<Node<T>> vecinos : nodes.values()) {
-            total += vecinos.size();
+        for(Set<Node<T>> conexiones : graph.values()){
+            total += conexiones.size();
         }
-
         return total;
     }
+    public int totalConexiones(){
+        Set<String> set = new HashSet<>();
 
-    public int totalConexiones() {
-        return totalDirecciones() / 2;
-    }
+        for(Map.Entry<Node<T>, Set<Node<T>>> entry : graph.entrySet()){
+            for(Node<T> destino : entry.getValue()){
+                String a = entry.getKey().toString();
+                String b = destino.toString();
 
-    public void direcciones(T value) {
-        Node<T> node = new Node<>(value);
-        if (!nodes.containsKey(node)) {
-            System.out.println("No existe.");
-            return;
+                String key = (a.compareTo(b) < 0) ? a + "-" + b : b + "-" + a;
+                set.add(key);
+            }
         }
-        System.out.print(node + " -> ");
-        for (Node<T> vecino : nodes.get(node)) {
-            System.out.print(vecino + " ");
-        }
-        System.out.println();
+        return set.size();
     }
-
 }
 // direcciones conecciones eliminar nodo

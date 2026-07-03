@@ -423,4 +423,13 @@ Peso del arbol: 3
 
 La práctica permitió comprender el funcionamiento interno de los árboles binarios y el uso de recursividad para recorrer e insertar elementos. También se aplicó programación genérica mediante `Comparable`, permitiendo reutilizar la misma estructura para diferentes tipos de objetos y fortaleciendo el manejo de estructuras dinámicas en Java.
 
+## Grafos
+
+En esta parte se trabajó con una clase `Graph<T>` para representar un grafo usando nodos y conexiones. Para guardar la información se utilizó un `Map`, donde cada nodo tiene asociado un conjunto de nodos conectados.
+
+El grafo permite agregar nodos, crear conexiones en ambos sentidos con `addEdge` y conexiones en una sola dirección con `addEdgeUni`. También se pueden eliminar conexiones y borrar un nodo completo junto con sus relaciones.
+
+En el método `runGraph()` se probaron estas funciones creando un grafo con nodos como A, B, C, D, E, J y K. Luego se modificaron algunas conexiones, se eliminó el nodo K y se mostraron los totales de direcciones y conexiones para comprobar cómo cambia el grafo.
+
+
 ![Resultado](/src/imagenes/final.png)

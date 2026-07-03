@@ -31,35 +31,48 @@ public class App {
     }
 
 private static void runGraph() {
-    Graph<String> graph = new Graph<>();
 
-        graph.addEdge("K", "A");
-        graph.addEdge("E", "K");
+    Graph<String> g = new Graph<>();
 
-        graph.addEdge("A", "B");
-        graph.addEdge("B", "C");
+    g.add("A");
+    g.add("B");
+    g.add("C");
+    g.add("D");
+    g.add("E");
+    g.add("J");
+    g.add("K");
 
-        graph.addEdge("A", "C");
-        graph.addEdge("A", "D");
+    g.addEdge("A", "D");
+    g.addEdge("D", "J");
+    g.addEdge("E", "J");
 
-        graph.addEdge("C", "D");
-        graph.addEdge("C", "E");
+    g.addEdgeUni("A", "C");
+    g.addEdgeUni("B", "C");
+    g.addEdgeUni("C", "D");
+    g.addEdgeUni("C", "E");
+    g.addEdgeUni("E", "K");
+    g.addEdgeUni("K", "A");
 
-        graph.addEdge("E", "J");
-        
-        
+    System.out.println("----- GRAFO ORIGINAL -----");
+    g.printGraph();
 
-        System.out.println("Grafo original:");
-        graph.print();
+    g.removeEdge("E", "J");
+    g.removeEdge("A", "B"); 
+    g.addEdgeUni("A", "B"); 
 
-        System.out.println("\nEliminando K...\n");
-        graph.removeNode("K");
+    System.out.println("\n----- GRAFO MODIFICADO -----");
+    g.printGraph();
 
-        System.out.println("Grafo actualizado:");
-        graph.print();
+    System.out.println("\nDirecciones: " + g.totalDirecciones());
+    System.out.println("Conexiones: " + g.totalConexiones());
 
-        System.out.println("\nCantidad de direcciones: " + graph.totalDirecciones());
-        System.out.println("Cantidad de conexiones: " + graph.totalConexiones());
+    g.remove("K");
+
+    System.out.println("\n----- Sin K -----");
+    g.printGraph();
+
+    System.out.println("\nTotal direcciones: " + g.totalDirecciones());
+    System.out.println("Total conexiones: " + g.totalConexiones());
 }
 
     private static void runPersonaController() {
