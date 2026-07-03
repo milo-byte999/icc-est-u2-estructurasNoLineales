@@ -1,9 +1,11 @@
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
-
 import collections.maps.Maps;
 import collections.sets.Sets;
+import eva.Persona1;
+import eva.PersonaController;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import models.Contacto;
 import models.Persona;
 import structures.node.Node;
@@ -22,6 +24,24 @@ public class App {
 
         runSets();
         runMaps();
+        runPersonaController();
+
+    }
+
+    private static void runPersonaController() {
+        PersonaController controller = new PersonaController();
+
+        List<Persona1> personas = new ArrayList<>();
+
+        personas.add(new Persona1("Juan", 20));
+        personas.add(new Persona1("Ana", 18));
+        personas.add(new Persona1("Luis", 30));
+        personas.add(new Persona1("Carlos", 17));
+        personas.add(new Persona1("Pedro", 25));
+        personas.add(new Persona1("Juan", 20));
+
+        controller.filtrarYOrdenar(personas, 18);
+        controller.agruparPorEdad(personas);
     }
 
     private static void runMaps() {
@@ -36,7 +56,6 @@ public class App {
         // Implementacion -> HashSet hashcode
 
         System.out.println("\n-------------HashCode-----------");
-        ;
         Set<String> hashSet = sets.construirHashSet();
         System.out.println(hashSet);
         System.out.println("Size = " + hashSet.size());
@@ -47,27 +66,23 @@ public class App {
         System.out.println(lis);
 
         System.out.println("\n-------------LinkedHashCode-----------");
-        ;
         Set<String> lSet = sets.LinkedHashSet();
         System.out.println(lSet);
         System.out.println("Size = " + lSet.size());
         System.out.println(lSet.contains("F"));
 
         System.out.println("\n-------------TreeSet-----------");
-        ;
         Set<String> tSet = sets.TreeSet();
         System.out.println(tSet);
         System.out.println("Size = " + tSet.size());
         System.out.println(tSet.contains("F"));
 
         System.out.println("\n-------------HashSet Contacto-----------");
-        ;
         Set<Contacto> hCSet = sets.construirHContacto();
         System.out.println(hCSet);
         System.out.println("Size = " + hCSet.size());
 
         System.out.println("\n-------------TreeSet Contacto-----------");
-        ;
         Set<Contacto> thCSet = sets.construirTreeSetContacto();
         System.out.println(thCSet);
         System.out.println("Size = " + thCSet.size());

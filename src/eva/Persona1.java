@@ -1,10 +1,10 @@
 package eva;
 
-public class Persona {
+public class Persona1 {
     private String nombre;
     private int edad;
 
-    public Persona(String nombre, int edad) {
+    public Persona1(String nombre, int edad) {
         this.nombre = nombre;
         this.edad = edad;
     }
