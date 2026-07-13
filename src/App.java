@@ -9,6 +9,8 @@ import java.util.Set;
 import models.Contacto;
 import models.Persona;
 import structures.grafos.Graph;
+import structures.grafos.PathResult;
+import structures.grafos.implementations.DFSPathFinder;
 import structures.node.Node;
 import structures.trees.BynariTree;
 import structures.trees.Ejercicio1;
@@ -27,53 +29,79 @@ public class App {
         runMaps();
         runPersonaController();
         runGraph();
+        runGraph2();
 
     }
 
-private static void runGraph() {
+    private static void runGraph2() {
+        Graph<String> g = new Graph<>();
 
-    Graph<String> g = new Graph<>();
+        g.addEdgeUni("A", "B");
+        g.addEdgeUni("A", "C");
+        g.addEdgeUni("B", "D");
+        g.addEdgeUni("D", "E");
+        g.addEdgeUni("E", "F");
+        g.addEdgeUni("C", "J");
+        g.addEdgeUni("K", "J");
 
-    g.add("A");
-    g.add("B");
-    g.add("C");
-    g.add("D");
-    g.add("E");
-    g.add("J");
-    g.add("K");
+        DFSPathFinder<String> dfs = new DFSPathFinder<>();
 
-    g.addEdge("A", "D");
-    g.addEdge("D", "J");
-    g.addEdge("E", "J");
+        PathResult<String> result = dfs.find(g, "A", "F");
+        PathResult<String> result2 = dfs.find(g, "A", "J");
+        PathResult<String> result3 = dfs.find(g, "A", "K");
 
-    g.addEdgeUni("A", "C");
-    g.addEdgeUni("B", "C");
-    g.addEdgeUni("C", "D");
-    g.addEdgeUni("C", "E");
-    g.addEdgeUni("E", "K");
-    g.addEdgeUni("K", "A");
+        System.out.println("PathResult");
+        System.out.println(result);
+        System.out.println("PathResult");
+        System.out.println(result2);
+        System.out.println("PathResult");
+        System.out.println(result3);
+    }
 
-    System.out.println("----- GRAFO ORIGINAL -----");
-    g.printGraph();
+    private static void runGraph() {
 
-    g.removeEdge("E", "J");
-    g.removeEdge("A", "B"); 
-    g.addEdgeUni("A", "B"); 
+        Graph<String> g = new Graph<>();
 
-    System.out.println("\n----- GRAFO MODIFICADO -----");
-    g.printGraph();
+        g.add("A");
+        g.add("B");
+        g.add("C");
+        g.add("D");
+        g.add("E");
+        g.add("J");
+        g.add("K");
 
-    System.out.println("\nDirecciones: " + g.totalDirecciones());
-    System.out.println("Conexiones: " + g.totalConexiones());
+        g.addEdge("A", "D");
+        g.addEdge("D", "J");
+        g.addEdge("E", "J");
 
-    g.remove("K");
+        g.addEdgeUni("A", "C");
+        g.addEdgeUni("B", "C");
+        g.addEdgeUni("C", "D");
+        g.addEdgeUni("C", "E");
+        g.addEdgeUni("E", "K");
+        g.addEdgeUni("K", "A");
 
-    System.out.println("\n----- Sin K -----");
-    g.printGraph();
+        System.out.println("----- GRAFO ORIGINAL -----");
+        g.printGraph();
 
-    System.out.println("\nTotal direcciones: " + g.totalDirecciones());
-    System.out.println("Total conexiones: " + g.totalConexiones());
-}
+        g.removeEdge("E", "J");
+        g.removeEdge("A", "B");
+        g.addEdgeUni("A", "B");
+
+        System.out.println("\n----- GRAFO MODIFICADO -----");
+        g.printGraph();
+
+        System.out.println("\nDirecciones: " + g.totalDirecciones());
+        System.out.println("Conexiones: " + g.totalConexiones());
+
+        g.remove("K");
+
+        System.out.println("\n----- Sin K -----");
+        g.printGraph();
+
+        System.out.println("\nTotal direcciones: " + g.totalDirecciones());
+        System.out.println("Total conexiones: " + g.totalConexiones());
+    }
 
     private static void runPersonaController() {
         PersonaController controller = new PersonaController();
