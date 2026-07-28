@@ -1,7 +1,7 @@
 package structures.grafos;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import structures.node.Node;
@@ -12,15 +12,15 @@ public class Graph<T> {
     private Map<Node<T>, Set<Node<T>>> graph;
 
     public Graph() {
-        nodes = new HashMap<>();
-        graph = new HashMap<>();
+        nodes = new LinkedHashMap<>();
+        graph = new LinkedHashMap<>();
     }
 
     public void add(T data) {
         if (!nodes.containsKey(data)) {
             Node<T> node = new Node<>(data);
             nodes.put(data, node);
-            graph.put(node, new HashSet<>());
+            graph.put(node, new LinkedHashSet<>());
         }
     }
 
@@ -96,7 +96,7 @@ public class Graph<T> {
     }
 
     public int totalConexiones() {
-        Set<String> set = new HashSet<>();
+        Set<String> set = new LinkedHashSet<>();
 
         for (Map.Entry<Node<T>, Set<Node<T>>> entry : graph.entrySet()) {
             for (Node<T> destino : entry.getValue()) {
@@ -110,15 +110,26 @@ public class Graph<T> {
         return set.size();
     }
 
-public Set<Node<T>> getVecinos(T currente) {
+    public Set<Node<T>> getVecinos(T currente) {
 
-    Node<T> node = nodes.get(currente);
+        Node<T> node = nodes.get(currente);
 
-    if (node == null) {
-        return new HashSet<>();
+        if (node == null) {
+            return new LinkedHashSet<>();
+        }
+
+        return graph.get(node);
     }
 
-    return graph.get(node);
-}
+    public Set<Node<T>> getNodes() {
+        return graph.keySet();
+    }
 
+    public Map<Node<T>, Set<Node<T>>> getGraph() {
+        return graph;
+    }
+
+    public boolean contains(T data) {
+        return nodes.containsKey(data);
+    }
 }

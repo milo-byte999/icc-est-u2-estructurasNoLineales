@@ -1,0 +1,10 @@
+NODE,j,306,83
+NODE,k,550,248
+NODE,ju,342,318
+NODE,s,705,432
+NODE,g,447,522
+EDGE,j,k,true
+EDGE,j,g,true
+EDGE,k,ju,true
+EDGE,s,k,false
+EDGE,s,g,true

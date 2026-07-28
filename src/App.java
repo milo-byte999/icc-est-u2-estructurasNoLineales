@@ -1,13 +1,17 @@
 import collections.maps.Maps;
 import collections.sets.Sets;
+import controllers.MapController;
 import eva.Persona1;
 import eva.PersonaController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.SwingUtilities;
 import models.Contacto;
 import models.Persona;
+import persistence.FileGraphRepository;
+import persistence.GraphRepository;
 import structures.grafos.Graph;
 import structures.grafos.PathResult;
 import structures.grafos.implementations.DFSPathFinder;
@@ -18,20 +22,33 @@ import structures.trees.Ejercicio2;
 import structures.trees.Ejercicio3;
 import structures.trees.Ejercicio4;
 import structures.trees.IntTree;
+import views.MainFrame;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        runIntTree();
-        runBynariTree();
-        runEjercicios();
+        //runIntTree();
+        //runBynariTree();
+        //runEjercicios();
 
-        runSets();
-        runMaps();
-        runPersonaController();
-        runGraph();
-        runGraph2();
+        //runSets();
+        //runMaps();
+        //runPersonaController();
+        //runGraph();
+        //runGraph2();
 
+        SwingUtilities.invokeLater(() -> {
+
+            String rutaImagenMapa = "src/resources/map.png";
+            String archivoConfiguracion = "mapa.csv";
+
+            GraphRepository repository = new FileGraphRepository();
+            MapController controller = new MapController(repository, archivoConfiguracion);
+
+            MainFrame frame = new MainFrame(controller, rutaImagenMapa);
+            frame.setVisible(true);
+        });
     }
+
 
     private static void runGraph2() {
         Graph<String> g = new Graph<>();
