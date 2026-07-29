@@ -246,35 +246,51 @@ Al usar una cola, todos los nodos que están a un salto del inicio se procesan a
 
 Esta tabla se completa ejecutando el programa: se eligen tres pares de nodos distintos (inicio y destino) y cada par se prueba una vez con BFS y otra con DFS, anotando cuántos nodos visitó cada algoritmo, cuántas aristas tiene el camino final encontrado, y el tiempo que tomó la búsqueda.
 
-**Análisis requerido**
+## Análisis de resultados
 
-Después de completar las pruebas, se debe responder lo siguiente:
+### 1. Diferencias observadas entre BFS y DFS
 
-¿Qué diferencias se observaron en el orden de exploración de BFS y DFS?
-BFS recorre el grafo por niveles, revisando primero todos los vecinos directos del nodo de inicio antes de avanzar más lejos. DFS, en cambio, avanza por una sola rama hasta el final antes de retroceder y probar otra. Esto hace que, aunque ambos partan del mismo nodo, el orden en que van marcando los nodos como visitados sea distinto casi siempre.
+BFS realizó una exploración por niveles, recorriendo primero los nodos más cercanos al nodo inicial. 
+DFS realizó una exploración profunda, siguiendo un camino hasta encontrar el destino y retrocediendo cuando fue necesario.
 
-¿BFS encontró una ruta con menor cantidad de aristas en todos los casos evaluados?
-En un grafo sin pesos, como el de este proyecto, BFS está diseñado para encontrar siempre el camino con menos saltos entre el inicio y el destino. Lo esperable es que en los tres casos la ruta de BFS tenga la misma o menor cantidad de aristas que la de DFS. Esto se debe confirmar con los datos reales de la Tabla 1.
+En las pruebas realizadas se observó que DFS generalmente visitó menos nodos que BFS en algunos casos, debido al orden de exploración del grafo.
 
-¿DFS encontró rutas diferentes a las obtenidas con BFS?
-Por lo general sí, salvo que entre los dos nodos exista un único camino posible. Como DFS no busca el camino más corto sino que sigue una rama hasta el final, es común que el camino que entrega sea más largo o distinto al de BFS.
+### 2. ¿BFS encontró rutas con menor cantidad de aristas?
 
-¿Qué algoritmo visitó más nodos en cada caso?
-Esto depende de cómo estén distribuidos los nodos y las conexiones en el mapa. BFS suele visitar más nodos cuando el destino está rodeado de varios caminos cortos, porque revisa muchos vecinos antes de avanzar. DFS puede visitar menos nodos si toma la rama correcta desde el inicio, o más si primero explora ramas que no llevan a ningún lado. La respuesta concreta depende de los valores registrados en la Tabla 1.
+En los casos evaluados ambos algoritmos encontraron rutas con la misma cantidad de aristas. 
+Esto ocurre porque el grafo utilizado tiene caminos similares entre los nodos de inicio y destino.
 
-¿Los tiempos de ejecución fueron suficientes para determinar cuál algoritmo es mejor?
-En mapas pequeños como los usados en las pruebas, ambos algoritmos se ejecutan en tiempos muy cortos y muy parecidos entre sí, por lo que el tiempo de ejecución por sí solo no es un buen indicador para decidir cuál algoritmo es mejor. Es más representativo comparar la cantidad de nodos visitados y la longitud del camino encontrado.
+### 3. ¿DFS encontró rutas diferentes a BFS?
 
-¿Cómo influyó la estructura del grafo en el comportamiento de cada algoritmo?
-La cantidad de conexiones por nodo, el uso de conexiones de un solo sentido y el orden en que se agregaron los vecinos afectan directamente el recorrido. Entre más conexiones tenga un nodo, más opciones debe evaluar cada algoritmo, y las calles de un solo sentido pueden bloquear caminos que en apariencia se ven más cortos, obligando a ambos algoritmos a buscar rutas alternativas.
+En las pruebas realizadas DFS y BFS encontraron rutas con igual cantidad de aristas, aunque el número de nodos visitados fue diferente en algunos casos debido al orden de búsqueda.
 
-¿Qué ventajas aporta separar la lógica del algoritmo de la visualización?
-Al tener BFS y DFS trabajando solo con el grafo y devolviendo un resultado (PathResult), sin depender de la ventana ni de los componentes gráficos, es posible probar y corregir los algoritmos sin necesidad de abrir la interfaz. También permite agregar un nuevo algoritmo de búsqueda en el futuro sin tener que modificar la parte visual del programa.
+### 4. ¿Qué algoritmo visitó más nodos?
 
-¿Qué mejoras podrían implementarse para trabajar con calles ponderadas?
-Se necesitaría agregar un valor de peso o costo a cada conexión (por ejemplo, la distancia entre dos puntos), guardar ese dato también en el archivo mapa.csv, y cambiar la forma en que se explora el grafo para que, en lugar de contar solo los saltos, se sume el costo acumulado del camino. Con esos cambios se podría implementar un algoritmo como Dijkstra en lugar de, o además de, BFS y DFS.
+BFS visitó más nodos en los casos 2 y 3:
 
-Nota: este análisis debe completarse y ajustarse con base en la implementación, los resultados obtenidos en la Tabla 1 y las capturas generadas por el grupo.
+- Caso 2: BFS visitó 9 nodos mientras DFS visitó 5.
+- Caso 3: BFS visitó 6 nodos mientras DFS visitó 5.
+
+En el caso 1 ambos algoritmos visitaron 9 nodos.
+
+### 5. ¿Los tiempos permiten determinar cuál algoritmo es mejor?
+
+Los tiempos obtenidos fueron muy pequeños debido al tamaño reducido del grafo. 
+Por esta razón no es suficiente para determinar cuál algoritmo es mejor únicamente por tiempo.
+
+### 6. Influencia de la estructura del grafo
+
+La distribución de los nodos y conexiones influyó directamente en el recorrido. 
+Al existir diferentes caminos entre los nodos, DFS pudo encontrar algunas rutas explorando menos nodos, mientras que BFS revisó más conexiones para garantizar la búsqueda por niveles.
+
+### 7. Ventajas de separar la lógica del algoritmo y la visualización
+
+Separar ambas partes permite modificar o mejorar los algoritmos sin afectar la interfaz gráfica. 
+Además facilita las pruebas, el mantenimiento y la reutilización del código.
+
+### 8. Mejoras para trabajar con calles ponderadas
+
+Para trabajar con calles que tienen distancia, tiempo o costo sería necesario implementar algoritmos como Dijkstra o A*, donde las conexiones tengan pesos y la búsqueda considere el costo del recorrido.
 
 ---
 
