@@ -1,7 +1,8 @@
+![Logo institucional](logo.png)
 # Universidad Politécnica Salesiana
 
-Carrera: Computación
-Asignatura: Estructuras de Datos
+- Carrera: Computación
+- Asignatura: Estructuras de Datos
 
 Integrantes:
 - Emilio Montaleza — emontalezae@ups.edu.ec
