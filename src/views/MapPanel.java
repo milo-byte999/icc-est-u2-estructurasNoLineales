@@ -1,14 +1,5 @@
 package views;
 
-import models.MapPoint;
-import models.VisualizationMode;
-import structures.grafos.Graph;
-import structures.grafos.PathResult;
-import structures.node.Node;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -18,10 +9,18 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import models.MapPoint;
+import models.VisualizationMode;
+import structures.grafos.Graph;
+import structures.grafos.PathResult;
+import structures.node.Node;
 
 public class MapPanel extends JPanel implements MapView {
 
@@ -40,13 +39,13 @@ public class MapPanel extends JPanel implements MapView {
     private static final Color COLOR_VISITADO = new Color(255, 180, 60);
     private static final Color COLOR_RUTA = new Color(220, 40, 40);
 
-    public MapPanel(String rutaImagen) {
+    public MapPanel() {
 
         this.graph = new Graph<>();
         this.visitadosAnimados = new ArrayList<>();
         this.rutaAnimada = new ArrayList<>();
 
-        cargarImagen(rutaImagen);
+        cargarImagen();
 
         // Clic para agregar nodos (u otra acción que decida el controlador)
         addMouseListener(new MouseAdapter() {
@@ -63,9 +62,18 @@ public class MapPanel extends JPanel implements MapView {
         this.clickListener = listener;
     }
 
-    private void cargarImagen(String rutaImagen) {
+    private void cargarImagen() {
         try {
-            mapaFondo = ImageIO.read(new File(rutaImagen));
+            InputStream input = getClass().getResourceAsStream("/resources/map.png");
+
+            if (input == null) {
+                System.out.println("No se encontró la imagen dentro del jar: /resources/map.png");
+                mapaFondo = null;
+                return;
+            }
+
+            mapaFondo = ImageIO.read(input);
+
         } catch (IOException e) {
             System.out.println("No se pudo cargar la imagen del mapa: " + e.getMessage());
             mapaFondo = null;
@@ -116,8 +124,6 @@ public class MapPanel extends JPanel implements MapView {
         List<MapPoint> visitados = resultado.getVisitados();
         List<MapPoint> ruta = resultado.getPath();
 
-        // Primero anima todos los visitados, uno por uno.
-        // Cuando termina, empieza a animar la ruta final.
         int[] indice = {0};
 
         timer = new Timer(300, null);

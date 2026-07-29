@@ -1,14 +1,13 @@
 package views;
 
 import controllers.MapController;
+import java.awt.*;
+import javax.swing.*;
 import models.MapPoint;
 import models.VisualizationMode;
 import structures.grafos.Graph;
 import structures.grafos.PathResult;
 import structures.node.Node;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class MainFrame extends JFrame implements MapView {
 
@@ -31,7 +30,7 @@ public class MainFrame extends JFrame implements MapView {
 
     private static final int RADIO_DETECCION = 15; // píxeles de tolerancia para hacer clic sobre un nodo
 
-    public MainFrame(MapController controller, String rutaImagenMapa) {
+    public MainFrame(MapController controller) {
 
         this.controller = controller;
         this.nodoPendienteConexion = null;
@@ -40,7 +39,7 @@ public class MainFrame extends JFrame implements MapView {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        mapPanel = new MapPanel(rutaImagenMapa);
+        mapPanel = new MapPanel();
         mapPanel.setPreferredSize(new Dimension(800, 600));
         mapPanel.setClickListener(this::manejarClicEnMapa);
 

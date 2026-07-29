@@ -3,6 +3,8 @@ import collections.sets.Sets;
 import controllers.MapController;
 import eva.Persona1;
 import eva.PersonaController;
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,17 +38,28 @@ public class App {
         //runGraph();
         //runGraph2();
 
-        SwingUtilities.invokeLater(() -> {
+SwingUtilities.invokeLater(() -> {
 
-            String rutaImagenMapa = "src/resources/map.png";
-            String archivoConfiguracion = "mapa.csv";
+            String directorioBase = obtenerDirectorioDelJar();
+            String archivoConfiguracion = directorioBase + File.separator + "mapa.csv";
 
             GraphRepository repository = new FileGraphRepository();
             MapController controller = new MapController(repository, archivoConfiguracion);
 
-            MainFrame frame = new MainFrame(controller, rutaImagenMapa);
+            MainFrame frame = new MainFrame(controller);
             frame.setVisible(true);
         });
+    }
+
+    private static String obtenerDirectorioDelJar() {
+        try {
+            File jarFile = new File(App.class.getProtectionDomain()
+                    .getCodeSource().getLocation().toURI());
+            return jarFile.getParentFile().getAbsolutePath();
+        } catch (URISyntaxException e) {
+            // Si algo falla, se usa el directorio actual como respaldo
+            return System.getProperty("user.dir");
+        }
     }
 
 

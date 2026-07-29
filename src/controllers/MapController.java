@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import models.MapPoint;
 import models.VisualizationMode;
@@ -112,6 +113,15 @@ public class MapController {
     }
 
     public void cargarConfiguracion() {
+
+        File archivo = new File(archivoConfiguracion);
+
+        if (!archivo.exists()) {
+            // Primera ejecución: no hay archivo todavía, se arranca con grafo vacío
+            actualizarVista();
+            return;
+        }
+
         try {
             graph = repository.load(archivoConfiguracion);
             actualizarVista();
@@ -205,5 +215,4 @@ public class MapController {
             System.out.println("Error: " + mensaje);
         }
     }
-
 }
