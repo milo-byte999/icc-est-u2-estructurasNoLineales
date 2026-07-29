@@ -1,4 +1,4 @@
-![Logo institucional](logo.png)
+![Logo institucional](Logo.png)
 # Universidad Politécnica Salesiana
 
 - Carrera: Computación
