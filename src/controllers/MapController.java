@@ -148,7 +148,21 @@ public class MapController {
             return;
         }
 
+        long inicioTiempo = System.nanoTime();
+
         PathResult<MapPoint> resultado = finder.find(graph, inicio, destino);
+
+        long finTiempo = System.nanoTime();
+
+        double tiempoMs = (finTiempo - inicioTiempo) / 1_000_000.0;
+
+        System.out.println("===== RESULTADOS =====");
+        System.out.println("Algoritmo: " + algoritmo);
+        System.out.println("Inicio: " + idInicio);
+        System.out.println("Destino: " + idDestino);
+        System.out.println("Nodos visitados: " + resultado.getVisitados().size());
+        System.out.println("Cantidad de aristas: " + (resultado.getPath().size() - 1));
+        System.out.println("Tiempo: " + tiempoMs + " ms");
 
         if (view != null) {
             view.mostrarResultado(resultado, modo);
