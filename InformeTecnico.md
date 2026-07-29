@@ -237,12 +237,12 @@ Al usar una cola, todos los nodos que están a un salto del inicio se procesan a
 
 | Caso | Algoritmo | Inicio | Destino | Nodos visitados | Cantidad de aristas | Tiempo |
 |---|---|---|---|---|---|---|
-| 1 | BFS |  |  |  |  |  |
-| 1 | DFS |  |  |  |  |  |
-| 2 | BFS |  |  |  |  |  |
-| 2 | DFS |  |  |  |  |  |
-| 3 | BFS |  |  |  |  |  |
-| 3 | DFS |  |  |  |  |  |
+| 1 | BFS | A | K | 9 | 4 | 0.0479 ms |
+| 1 | DFS | A | K | 9 | 4 | 0.0342 ms |
+| 2 | BFS | C | H | 9 | 4 | 0.0707 ms |
+| 2 | DFS | C | H | 5 | 4 | 0.0243 ms |
+| 3 | BFS | I | B | 6 | 4 | 0.0428 ms |
+| 3 | DFS | I | B | 5 | 4 | 0.0151 ms |
 
 Esta tabla se completa ejecutando el programa: se eligen tres pares de nodos distintos (inicio y destino) y cada par se prueba una vez con BFS y otra con DFS, anotando cuántos nodos visitó cada algoritmo, cuántas aristas tiene el camino final encontrado, y el tiempo que tomó la búsqueda.
 
